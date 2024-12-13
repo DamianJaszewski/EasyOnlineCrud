@@ -1,0 +1,24 @@
+# React - frontend
+/easyonlinecrud.client/node_modules/
+/easyonlinecrud.client/build/
+/easyonlinecrud.client/dist/
+/easyonlinecrud.client/*.log
+/easyonlinecrud.client/.env
+/easyonlinecrud.client.env.local
+/easyonlinecrud.client.env.*.local
+/easyonlinecrud.client/.vscode/
+/easyonlinecrud.client/.idea/
+
+# ASP.NET Core - Backend
+/EasyOnlineCrud.Server/bin/
+/EasyOnlineCrud.Server/obj/
+/EasyOnlineCrud.Server/*.log
+/EasyOnlineCrud.Server/appsettings.json
+/EasyOnlineCrud.Server/appsettings.*.json
+/EasyOnlineCrud.Server/secrets.json
+/EasyOnlineCrud.Server/.vscode/
+/EasyOnlineCrud.Server/.idea/
+
+# Ogólne wykluczenia systemowe
+.DS_Store
+Thumbs.db

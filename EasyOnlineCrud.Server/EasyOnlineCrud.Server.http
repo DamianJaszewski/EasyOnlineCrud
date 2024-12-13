@@ -1,0 +1,6 @@
+@EasyOnlineCrud.Server_HostAddress = http://localhost:5279
+
+GET {{EasyOnlineCrud.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
