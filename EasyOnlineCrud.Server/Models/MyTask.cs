@@ -1,4 +1,6 @@
 ﻿
+using System.Text.Json.Serialization;
+
 namespace EasyOnlineCrud.Server.Models
 {
     public class MyTask
@@ -8,6 +10,7 @@ namespace EasyOnlineCrud.Server.Models
         public string Title { get; set; }
         public string Description { get; set; }
 
+        [JsonIgnore]
         public virtual MyLabel? MyLabel { get; set; }
     }
 }
