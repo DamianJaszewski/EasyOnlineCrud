@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
+
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
     const [forecasts, setForecasts] = useState();
@@ -32,11 +37,29 @@ function App() {
         </table>;
 
     return (
-        <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
-            <p>This component demonstrates fetching data from the server.</p>
-            {contents}
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Home/>}/>
+            </Routes>
+            <Routes>
+                <Route path="login" element={<Login/>}/>
+            </Routes>
+            <Routes>
+                <Route path="register" element={<Register/>}/>
+            </Routes>
+            <div>
+                <h1 id="tabelLabel">Weather forecast</h1>
+                <form>
+                    <label>
+                        Name:
+                        <input type="text" name="name" />
+                    </label>
+                    <input type="submit" value="Submit" />
+                </form>
+                <p>This component demonstrates fetching data from the server.</p>
+                {contents}
+            </div>
+        </BrowserRouter>
     );
     
     async function populateWeatherData() {
