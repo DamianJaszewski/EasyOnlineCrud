@@ -1,13 +1,21 @@
 ﻿
 import { useEffect, useState } from 'react';
-import { Container} from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 
 function Home() {
 
+    const initialTaskState = {
+        id: 0,
+        labelId: 0,
+        title: '',
+        description: ''
+    };
+
     const [myTasks, setMyTasks] = useState();
+    const [newTask, setNewTask] = useState(initialTaskState);
 
     useEffect(() => {
-        populateMyTaskData();
+        getTaskData();
     }, []);
 
     const contents = myTasks === undefined
@@ -32,23 +40,57 @@ function Home() {
     return (
         <Container className="mt-5" style={{ maxWidth: "800px" }}>
             <h1 className="mb-3">Menadżer zadań</h1>
-            <form>
-                <label>
-                    Name:
-                    <input type="text" name="name" />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-            <p>This component demonstrates fetching data from the server.</p>
+            <Form onSubmit={handleSubmit}>
+                {/* Sekcja z inputami obok siebie */}
+                <div className="d-flex mb-3 gap-3">
+                    <Form.Group controlId="formTitle" className="flex-fill">
+                        <Form.Label style={{ display: "flex" }}>Title</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter title"
+                            value={newTask.title}
+                            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                        />
+                    </Form.Group>
+
+                    <Form.Group controlId="formDescription" className="flex-fill">
+                        <Form.Label style={{ display: "flex" }}>Description</Form.Label>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter description"
+                            value={newTask.description}
+                            onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                        />
+                    </Form.Group>
+                </div>
+                <Button className="btn w-100" style={{
+                    backgroundColor: '#152837',
+                    color: '#fff',
+                    borderRadius: '4px',
+                    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.2)',
+                }} type="submit">
+                    Add Task
+                </Button>
+            </Form>
             {contents}
         </Container>
+
+
     )
 
-    async function populateMyTaskData() {
+    async function getTaskData() {
         const response = await fetch('https://localhost:7021/api/MyTasks');
         //const response = await fetch('weatherforecast');
         const data = await response.json();
         setMyTasks(data);
+    }
+
+    async function handleSubmit() {
+        const response = await fetch('https://localhost:7021/api/MyTasks', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newTask),
+        });
     }
 }
 

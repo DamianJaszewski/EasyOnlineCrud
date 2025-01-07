@@ -1,6 +1,6 @@
 
 import { Navbar, Nav, Container } from "react-bootstrap";
-/*import { Link } from 'react-router-dom'*/
+import { Link } from 'react-router-dom'
 
 
 function Navigation() {
@@ -13,9 +13,9 @@ function Navigation() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     {/* Nawigacja z prawej strony */}
                     <Nav className="ms-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/login">Login</Nav.Link>
-                        <Nav.Link href="/register">Register</Nav.Link>
+                        <Link class='nav-link' to='/'>Home</Link>
+                        <Link class='nav-link' to='/login'>Login</Link>
+                        <Link class='nav-link' to='/register'>Register</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
