@@ -1,5 +1,6 @@
-
+﻿
 import { useEffect, useState } from 'react';
+import { Container} from "react-bootstrap";
 
 function Home() {
 
@@ -29,8 +30,8 @@ function Home() {
         </table>;
 
     return (
-        <div>
-            <h1 id="tabelLabel">Weather forecast</h1>
+        <Container className="mt-5" style={{ maxWidth: "800px" }}>
+            <h1 className="mb-3">Menadżer zadań</h1>
             <form>
                 <label>
                     Name:
@@ -40,7 +41,7 @@ function Home() {
             </form>
             <p>This component demonstrates fetching data from the server.</p>
             {contents}
-        </div>
+        </Container>
     )
 
     async function populateMyTaskData() {
