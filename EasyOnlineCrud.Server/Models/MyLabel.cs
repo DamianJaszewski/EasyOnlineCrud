@@ -1,4 +1,6 @@
-﻿namespace EasyOnlineCrud.Server.Models
+﻿using System.Text.Json.Serialization;
+
+namespace EasyOnlineCrud.Server.Models
 {
     public class MyLabel
     {
@@ -9,6 +11,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<MyTask> MyTasks { get; set; }
     }
 }

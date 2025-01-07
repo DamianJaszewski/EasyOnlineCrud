@@ -78,6 +78,10 @@ namespace EasyOnlineCrud.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<MyTask>> PostMyTask(MyTask myTask)
         {
+            if (myTask.MyLabelId == 0)
+            {
+                myTask.MyLabelId = null;
+            }
             _context.MyTasks.Add(myTask);
             await _context.SaveChangesAsync();
 
