@@ -1,6 +1,6 @@
 ﻿
 import { useEffect, useState } from 'react';
-import { Container, Form, Button } from "react-bootstrap";
+import { Form, Modal } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
 
 function Home() {
@@ -14,6 +14,9 @@ function Home() {
 
     const [myTasks, setMyTasks] = useState();
     const [newTask, setNewTask] = useState(initialTaskState);
+    const [showModal, setShowModal] = useState(false);
+
+    const handleModalToggle = () => setShowModal(!showModal);
 
     useEffect(() => {
         getTaskData();
@@ -41,29 +44,37 @@ function Home() {
     return (
 
         <ContainerWrapper maxWidth="800px" heading="Menadżer zadań">
-            <Form onSubmit={handleSubmit}>
-                <div className="d-flex mb-3 gap-3" style={{flexWrap: "wrap"}}>
-                <InputWrapper
-                    controlId="formTitle"
-                    title="Title"
-                    type="text"
-                    placeholder="Enter title"
-                    value={newTask.title}
-                    onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
-                    className="flex-fill"
-                />
-                <InputWrapper
-                    controlId="formDescription"
-                    title="Description"
-                    type="text"
-                    placeholder="Enter description"
-                    value={newTask.description}
-                    onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
-                    className="flex-fill"
-                />
-                </div>
-                <CustomButton title="Add Task" />
-            </Form>
+            <CustomButton title="Popup" onClick={handleModalToggle} />
+            <Modal show={showModal} onHide={handleModalToggle} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add New Task</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form onSubmit={handleSubmit}>
+                        <div className="d-flex mb-3 gap-3" style={{flexWrap: "wrap"}}>
+                        <InputWrapper
+                            controlId="formTitle"
+                            title="Title"
+                            type="text"
+                            placeholder="Enter title"
+                            value={newTask.title}
+                            onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
+                            className="flex-fill"
+                        />
+                        <InputWrapper
+                            controlId="formDescription"
+                            title="Description"
+                            type="text"
+                            placeholder="Enter description"
+                            value={newTask.description}
+                            onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
+                            className="flex-fill"
+                        />
+                        </div>
+                        <CustomButton title="Add Task" />
+                    </Form>
+                </Modal.Body>
+            </Modal>
             {contents}
         </ContainerWrapper>
     )
@@ -81,6 +92,9 @@ function Home() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTask),
         });
+
+        setNewTask({ title: "", description: "" }); // Reset formularza
+        handleModalToggle(); // Zamknij popup
     }
 }
 
