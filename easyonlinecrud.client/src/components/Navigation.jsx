@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 function Navigation() {
     return (
-        <Navbar bg="light" variant="light" expand="lg" sticky="top">
+        <Navbar variant="light" expand="lg" sticky="top">
             <Container>
                 {/* Logo po lewej stronie */}
                 <Navbar.Brand href="/">Twoja Aplikacja</Navbar.Brand>

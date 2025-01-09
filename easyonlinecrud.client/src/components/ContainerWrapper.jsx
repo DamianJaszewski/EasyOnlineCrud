@@ -7,7 +7,7 @@ function ContainerWrapper ({ maxWidth, children, heading }) {
             {{
                 maxWidth: maxWidth,
                 padding: "0.5rem",
-                background: "rgba(255, 255, 255, 0.2)", /* Półprzezroczyste tło */
+                //background: "rgba(255, 255, 255, 0.2)", Półprzezroczyste tło
                 backdropFilter: "blur(10px)", /* Efekt rozmycia */
                 textShadow: "0px 1px 2px rgba(0, 0, 0, 0.15)"
             }}>
