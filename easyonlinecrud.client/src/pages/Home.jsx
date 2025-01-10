@@ -1,7 +1,7 @@
 ﻿
 import { useEffect, useState } from 'react';
 import { Form, Modal } from "react-bootstrap";
-import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
+import { ContainerWrapper, InputWrapper, CustomButton, IconButton } from "../components";
 
 function Home() {
 
@@ -72,12 +72,14 @@ function Home() {
                         <td>{myTask.title}</td>
                         <td>{myTask.description}</td>
                         <td>
-                            <button onClick={() => handleEditTask(myTask)} className="btn btn-primary btn-sm">
-                                Edit
-                            </button>{' '}
-                            <button onClick={() => handleDeleteTask(myTask.id)} className="btn btn-danger btn-sm">
-                                Delete
-                            </button>
+                            <IconButton
+                                onClick={() => handleEditTask(myTask)}
+                                iconClass="bi bi-pencil"
+                            />
+                          <IconButton
+                                onClick={() => handleDeleteTask(myTask.id)}
+                                iconClass="bi bi-trash"
+                            />
                         </td>
                     </tr>
                 )}
@@ -120,8 +122,6 @@ function Home() {
             </Modal>
             {contents}
         </ContainerWrapper>
-
-
     )
 
     async function getTaskData() {
@@ -130,7 +130,6 @@ function Home() {
         const data = await response.json();
         setMyTasks(data);
     }
-
     
 }
 

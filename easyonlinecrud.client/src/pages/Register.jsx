@@ -19,7 +19,7 @@ function Register() {
                 <CustomButton title="Załóż konto" />
             </Form>
         </ContainerWrapper>
-    )
+    );
 }
 
 export default Register

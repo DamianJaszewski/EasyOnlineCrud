@@ -3,7 +3,6 @@ import { Form } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
 
 function Login() {
-
     return (
         <ContainerWrapper maxWidth = "400px" heading = "Logowanie">
             <Form>
