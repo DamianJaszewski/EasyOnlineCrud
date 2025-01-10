@@ -8,15 +8,13 @@ function Register() {
             <Form>
                 <InputWrapper
                     controlId="formEmail"
-                    title="Email"
                     type="email"
-                    placeholder="Podaj email"
+                    placeholder="Email"
                 />
                 <InputWrapper
                     controlId="formPassword"
-                    title="Hasło"
                     type="password"
-                    placeholder="Podaj hasło"
+                    placeholder="Hasło"
                 />
                 <CustomButton title="Załóż konto" />
             </Form>

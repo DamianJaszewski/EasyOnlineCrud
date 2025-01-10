@@ -15,7 +15,7 @@ function ContainerWrapper ({ maxWidth, children, heading }) {
                 {{
                     position: "relative",
                     zIndex: "1", /* Zapobiega dziedziczeniu efektu tła */
-                    padding: "1rem",
+                    padding: "1.5rem",
                     borderRadius: "6px", /* Zaokrąglenie */
                     boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2)" /* Subtelny cień */
                 }}>
