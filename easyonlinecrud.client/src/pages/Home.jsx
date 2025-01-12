@@ -72,14 +72,14 @@ function Home() {
                         <td>{myTask.title}</td>
                         <td>{myTask.description}</td>
                         <td>
-                            <IconButton
-                                onClick={() => handleEditTask(myTask)}
-                                iconClass="bi bi-pencil"
-                            />
                           <IconButton
-                                onClick={() => handleDeleteTask(myTask.id)}
-                                iconClass="bi bi-trash"
-                            />
+                               onClick={() => handleEditTask(myTask)}
+                               iconClass="bi bi-pencil"
+                           />
+                          <IconButton
+                               onClick={() => handleDeleteTask(myTask.id)}
+                               iconClass="bi bi-trash"
+                           />
                         </td>
                     </tr>
                 )}
