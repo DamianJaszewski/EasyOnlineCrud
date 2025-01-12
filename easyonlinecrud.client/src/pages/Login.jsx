@@ -7,16 +7,15 @@ import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
 function Login() {
 
     const initialUser = {
-        userName: '',
-        userEmail: '',
-        userPassword: ''
+        email: '',
+        password: ''
     }
 
     const [user, setUser] = useState(initialUser);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await fetch('https://localhost:7021/api/lgin', {
+        await fetch('https://localhost:7021/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
@@ -31,16 +30,16 @@ function Login() {
                     type="email"
                     placeholder="Email"
                     iconName="bi bi-envelope"
-                    value={user.userEmail}
-                    onChange={(e) => setUser({ ...user, userEmail: e.target.value })}
+                    value={user.email}
+                    onChange={(e) => setUser({ ...user, email: e.target.value })}
                 />
                 <InputWrapper
                     controlId="formPassword"
                     type="password"
                     placeholder="Hasło"
                     iconName="bi bi-key"
-                    value={user.userPassword}
-                    onChange={(e) => setUser({ ...user, userPassword: e.target.value })}
+                    value={user.password}
+                    onChange={(e) => setUser({ ...user, password: e.target.value })}
                 />
                 <CustomButton title="Zaloguj"/>
             </Form>

@@ -1,5 +1,8 @@
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using EasyOnlineCrud.Server.Models;
 
 namespace EasyOnlineCrud.Server
 {
@@ -35,6 +38,10 @@ namespace EasyOnlineCrud.Server
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+           
+            builder.Services.AddAuthorization();
+            builder.Services.AddIdentityApiEndpoints<MyUser>()
+                .AddEntityFrameworkStores<DataContext>();
 
             var app = builder.Build();
 
@@ -53,7 +60,7 @@ namespace EasyOnlineCrud.Server
             app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
-
+            app.MapIdentityApi<MyUser>();
 
             app.MapControllers();
 
