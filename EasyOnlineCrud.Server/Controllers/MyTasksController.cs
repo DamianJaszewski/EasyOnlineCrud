@@ -7,18 +7,24 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EasyOnlineCrud.Server;
 using EasyOnlineCrud.Server.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Azure.Core;
 
 namespace EasyOnlineCrud.Server.Controllers
 {
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MyTasksController : ControllerBase
     {
         private readonly DataContext _context;
+        private readonly UserManager<MyUser> _userManager;
 
-        public MyTasksController(DataContext context)
+        public MyTasksController(DataContext context, UserManager<MyUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/MyTasks
@@ -52,6 +58,7 @@ namespace EasyOnlineCrud.Server.Controllers
                 return BadRequest();
             }
 
+            myTask.UserId = _userManager.GetUserId(User);
             _context.Entry(myTask).State = EntityState.Modified;
 
             try
@@ -82,6 +89,7 @@ namespace EasyOnlineCrud.Server.Controllers
             {
                 myTask.MyLabelId = null;
             }
+            myTask.UserId = _userManager.GetUserId(User);
             _context.MyTasks.Add(myTask);
             await _context.SaveChangesAsync();
 
