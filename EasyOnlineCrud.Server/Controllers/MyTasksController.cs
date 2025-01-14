@@ -10,21 +10,20 @@ using EasyOnlineCrud.Server.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Azure.Core;
+using System.Security.Claims;
 
 namespace EasyOnlineCrud.Server.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class MyTasksController : ControllerBase
     {
         private readonly DataContext _context;
-        private readonly UserManager<MyUser> _userManager;
 
-        public MyTasksController(DataContext context, UserManager<MyUser> userManager)
+        public MyTasksController(DataContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         // GET: api/MyTasks
@@ -58,7 +57,7 @@ namespace EasyOnlineCrud.Server.Controllers
                 return BadRequest();
             }
 
-            myTask.UserId = _userManager.GetUserId(User);
+            myTask.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _context.Entry(myTask).State = EntityState.Modified;
 
             try
@@ -89,7 +88,7 @@ namespace EasyOnlineCrud.Server.Controllers
             {
                 myTask.MyLabelId = null;
             }
-            myTask.UserId = _userManager.GetUserId(User);
+            myTask.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             _context.MyTasks.Add(myTask);
             await _context.SaveChangesAsync();
 

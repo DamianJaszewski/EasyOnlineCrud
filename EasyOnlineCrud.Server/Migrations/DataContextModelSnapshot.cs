@@ -54,21 +54,18 @@ namespace EasyOnlineCrud.Server.Migrations
                     b.Property<int?>("MyLabelId")
                         .HasColumnType("int");
 
-                    b.Property<string>("MyUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MyLabelId");
 
-                    b.HasIndex("MyUserId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("MyTasks");
                 });
@@ -277,11 +274,13 @@ namespace EasyOnlineCrud.Server.Migrations
                         .WithMany("MyTasks")
                         .HasForeignKey("MyLabelId");
 
-                    b.HasOne("EasyOnlineCrud.Server.Models.MyUser", null)
-                        .WithMany("MyTasks")
-                        .HasForeignKey("MyUserId");
+                    b.HasOne("EasyOnlineCrud.Server.Models.MyUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
 
                     b.Navigation("MyLabel");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,11 +335,6 @@ namespace EasyOnlineCrud.Server.Migrations
                 });
 
             modelBuilder.Entity("EasyOnlineCrud.Server.Models.MyLabel", b =>
-                {
-                    b.Navigation("MyTasks");
-                });
-
-            modelBuilder.Entity("EasyOnlineCrud.Server.Models.MyUser", b =>
                 {
                     b.Navigation("MyTasks");
                 });

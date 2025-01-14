@@ -5,32 +5,26 @@
 namespace EasyOnlineCrud.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class UserForTasks : Migration
+    public partial class TaskWithUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "MyUserId",
+                name: "UserId",
                 table: "MyTasks",
                 type: "nvarchar(450)",
                 nullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "UserId",
-                table: "MyTasks",
-                type: "nvarchar(max)",
-                nullable: true);
-
             migrationBuilder.CreateIndex(
-                name: "IX_MyTasks_MyUserId",
+                name: "IX_MyTasks_UserId",
                 table: "MyTasks",
-                column: "MyUserId");
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_MyTasks_AspNetUsers_MyUserId",
+                name: "FK_MyTasks_AspNetUsers_UserId",
                 table: "MyTasks",
-                column: "MyUserId",
+                column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id");
         }
@@ -39,15 +33,11 @@ namespace EasyOnlineCrud.Server.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_MyTasks_AspNetUsers_MyUserId",
+                name: "FK_MyTasks_AspNetUsers_UserId",
                 table: "MyTasks");
 
             migrationBuilder.DropIndex(
-                name: "IX_MyTasks_MyUserId",
-                table: "MyTasks");
-
-            migrationBuilder.DropColumn(
-                name: "MyUserId",
+                name: "IX_MyTasks_UserId",
                 table: "MyTasks");
 
             migrationBuilder.DropColumn(

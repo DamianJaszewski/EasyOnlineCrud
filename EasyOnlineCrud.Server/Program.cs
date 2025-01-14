@@ -36,12 +36,24 @@ namespace EasyOnlineCrud.Server
                 options.UseSqlServer(builder.Configuration.GetConnectionString("BasicConnection"));
             });
 
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-           
             builder.Services.AddAuthorization();
+
+            builder.Services.AddAuthentication("CookieAuth")
+                .AddCookie("CookieAuth", options =>
+                {
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.Cookie.SameSite = SameSiteMode.Strict;
+                });
+
+            // Activate identity APIs. By default, both cookies and proprietary tokens
+            // are activated. Cookies will be issued based on the `useCookies` querystring
+            // parameter in the login endpoint.
             builder.Services.AddIdentityApiEndpoints<MyUser>()
                 .AddEntityFrameworkStores<DataContext>();
+
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
 
@@ -59,6 +71,7 @@ namespace EasyOnlineCrud.Server
 
             app.UseCors(MyAllowSpecificOrigins);
 
+            app.UseAuthentication();
             app.UseAuthorization();
             app.MapIdentityApi<MyUser>();
 
