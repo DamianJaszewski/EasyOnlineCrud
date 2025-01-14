@@ -36,12 +36,14 @@ function Home() {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newTask),
+                credentials: "include"
             });
         } else {
             await fetch('https://localhost:7021/api/MyTasks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newTask),
+                credentials: "include"
             });
         }
 
@@ -52,6 +54,7 @@ function Home() {
     const handleDeleteTask = async (id) => {
         await fetch(`https://localhost:7021/api/MyTasks/${id}`, {
             method: 'DELETE',
+            credentials: "include"
         });
         await getTaskData();
     };
@@ -125,7 +128,10 @@ function Home() {
     )
 
     async function getTaskData() {
-        const response = await fetch('https://localhost:7021/api/MyTasks');
+        const response = await fetch('https://localhost:7021/api/MyTasks', {
+            method: "GET",
+            credentials: "include", // Kluczowe dla obsługi ciasteczek
+        });
         //const response = await fetch('weatherforecast');
         const data = await response.json();
         setMyTasks(data);

@@ -15,7 +15,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await fetch('https://localhost:7021/login', {
+        const response = await fetch('https://localhost:7021/login?useCookies=true', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(user),
