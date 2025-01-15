@@ -2,16 +2,11 @@
 import { useEffect, useState } from 'react';
 import { Form, Modal } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton, IconButton } from "../components";
+import { myTaskService } from "../services/myTaskService";
 
 function Home() {
 
-    const initialTaskState = {
-        id: 0,
-        labelId: 0,
-        title: '',
-        description: ''
-    };
-
+    const initialTaskState = { id: 0, labelId: 0, title: '', description: ''};
     const [myTasks, setMyTasks] = useState();
     const [newTask, setNewTask] = useState(initialTaskState);
     const [showModal, setShowModal] = useState(false);
@@ -20,8 +15,20 @@ function Home() {
     const handleModalToggle = () => setShowModal(!showModal);
 
     useEffect(() => {
-        getTaskData();
+        handleTaskData();
     }, []);
+
+    const handleTaskData = async () => {
+
+        const data = await myTaskService.getTasks();
+        setMyTasks(data);
+    }
+
+    const handleNewTask = () => {
+        setNewTask(initialTaskState);
+        setIsEditing(false);
+        setShowModal(true);
+    }
 
     const handleEditTask = (task) => {
         setNewTask(task);
@@ -32,31 +39,18 @@ function Home() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (isEditing) {
-            await fetch(`https://localhost:7021/api/MyTasks/${newTask.id}`, {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newTask),
-                credentials: "include"
-            });
+            console.log(newTask.id);
+            await myTaskService.updateTask(newTask);
         } else {
-            await fetch('https://localhost:7021/api/MyTasks', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(newTask),
-                credentials: "include"
-            });
+            await myTaskService.createTask(newTask);
         }
-
-        await getTaskData(); // Odśwież listę zadań
+        await handleTaskData(); // Odśwież listę zadań
         handleModalToggle();
     };
 
     const handleDeleteTask = async (id) => {
-        await fetch(`https://localhost:7021/api/MyTasks/${id}`, {
-            method: 'DELETE',
-            credentials: "include"
-        });
-        await getTaskData();
+        myTaskService.deleteTask(id)
+        await handleTaskData();
     };
 
     const contents = myTasks === undefined
@@ -92,7 +86,7 @@ function Home() {
     return (
 
         <ContainerWrapper maxWidth="800px" heading="Menadżer zadań">
-            <CustomButton title="Popup" onClick={handleModalToggle} />
+            <CustomButton title="Popup" onClick={handleNewTask} />
             <Modal show={showModal} onHide={handleModalToggle} centered>
                 <Modal.Header closeButton>
                     <Modal.Title>Add New Task</Modal.Title>
@@ -126,17 +120,6 @@ function Home() {
             {contents}
         </ContainerWrapper>
     )
-
-    async function getTaskData() {
-        const response = await fetch('https://localhost:7021/api/MyTasks', {
-            method: "GET",
-            credentials: "include", // Kluczowe dla obsługi ciasteczek
-        });
-        //const response = await fetch('weatherforecast');
-        const data = await response.json();
-        setMyTasks(data);
-    }
-    
 }
 
 export default Home

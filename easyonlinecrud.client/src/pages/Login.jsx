@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { Form } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
+import { userService } from "../services/userService";
 
 function Login() {
 
@@ -15,11 +16,7 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('https://localhost:7021/login?useCookies=true', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(user),
-        });
+        await userService.login(user);
     }
 
     return (
