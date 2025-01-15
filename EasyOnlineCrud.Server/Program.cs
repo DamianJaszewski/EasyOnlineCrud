@@ -72,9 +72,14 @@ namespace EasyOnlineCrud.Server
 
             app.UseCors(MyAllowSpecificOrigins);
 
+            app.MapIdentityApi<MyUser>();
+            app.MapPost("/logout", async (SignInManager<MyUser> signInManager) =>
+            {
+                await signInManager.SignOutAsync().ConfigureAwait(false);
+            }).RequireAuthorization(); // So that only authorized users can use this endpoint
+
             app.UseAuthentication();
             app.UseAuthorization();
-            app.MapIdentityApi<MyUser>();
 
             app.MapControllers();
 
