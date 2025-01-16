@@ -10,5 +10,5 @@ export const myTaskService = {
     updateTask: (task) =>
         apiRequest(`/api/MyTasks/${task.id}`, { method: "PUT", body: task }),
 
-    deleteTask: (id) => apiRequest(`/api/MyTasks"/${id}`, { method: "DELETE" }),
+    deleteTask: (id) => apiRequest(`/api/MyTasks/${id}`, { method: "DELETE" }),
 };

@@ -1,12 +1,12 @@
 ﻿
 import { useEffect, useState } from 'react';
 import { Form, Modal } from "react-bootstrap";
-import { ContainerWrapper, InputWrapper, CustomButton, IconButton } from "../components";
+import { ContainerWrapper, InputWrapper, CustomButton, CustomTable } from "../components";
 import { myTaskService } from "../services/myTaskService";
 
 function Home() {
 
-    const initialTaskState = { id: 0, labelId: 0, title: '', description: ''};
+    const initialTaskState = { id: 0, labelId: 0, title: '', description: '' };
     const [myTasks, setMyTasks] = useState();
     const [newTask, setNewTask] = useState(initialTaskState);
     const [showModal, setShowModal] = useState(false);
@@ -48,40 +48,20 @@ function Home() {
         handleModalToggle();
     };
 
-    const handleDeleteTask = async (id) => {
-        myTaskService.deleteTask(id)
+    const handleDeleteTask = async (task) => {
+        await myTaskService.deleteTask(task.id)
         await handleTaskData();
     };
 
-    const contents = myTasks === undefined
-        ? <p><em>Loading... Please refresh once the ASP.NET backend has started. See <a href="https://aka.ms/jspsintegrationreact">https://aka.ms/jspsintegrationreact</a> for more details.</em></p>
-        : <table className="table table-striped" aria-labelledby="tabelLabel">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {myTasks.map(myTask =>
-                    <tr>
-                        <td>{myTask.title}</td>
-                        <td>{myTask.description}</td>
-                        <td>
-                          <IconButton
-                               onClick={() => handleEditTask(myTask)}
-                               iconClass="bi bi-pencil"
-                           />
-                          <IconButton
-                               onClick={() => handleDeleteTask(myTask.id)}
-                               iconClass="bi bi-trash"
-                           />
-                        </td>
-                    </tr>
-                )}
-            </tbody>
-        </table>;
+    const columns = [
+        { header: "Title", field: "title" },
+        { header: "Description", field: "description" }
+    ];
+
+    const actions = [
+        { method: handleEditTask, iconName: "bi bi-pencil" },
+        { method: handleDeleteTask, iconName: "bi bi-trash" },
+    ];
 
     return (
 
@@ -117,7 +97,11 @@ function Home() {
                     </Form>
                 </Modal.Body>
             </Modal>
-            {contents}
+            <CustomTable
+                columns={columns}
+                data={myTasks}
+                actions={actions}
+            />
         </ContainerWrapper>
     )
 }
