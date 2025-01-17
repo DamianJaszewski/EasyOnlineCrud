@@ -25,16 +25,16 @@ function Register() {
     return (
         <ContainerWrapper maxWidth="400px" heading="Rejestracja">
             <Form onSubmit={handleSubmit}>
-                {/*<InputWrapper*/}
-                {/*    controlId="formName"*/}
-                {/*    type="name"*/}
-                {/*    placeholder="Nazwa"*/}
-                {/*    value={newUser.userName}*/}
-                {/*    onChange={(e) => setNewUser({ ...newUser, userName: e.target.value })}*/}
-                {/*/>*/}
+                <InputWrapper
+                    controlId="formName"
+                    type="name"
+                    placeholder="Nazwa"
+                    value={newUser.userName}
+                    onChange={(e) => setNewUser({ ...newUser, userName: e.target.value })}
+                />
                 <InputWrapper
                     controlId="formEmail"
-                    type="email"
+                    typeName="email"
                     placeholder="Email"
                     iconName="bi bi-envelope"
                     value={newUser.email}
@@ -42,7 +42,7 @@ function Register() {
                 />
                 <InputWrapper
                     controlId="formPassword"
-                    type="password"
+                    typeName="password"
                     placeholder="Hasło"
                     iconName="bi bi-key"
                     value={newUser.password}

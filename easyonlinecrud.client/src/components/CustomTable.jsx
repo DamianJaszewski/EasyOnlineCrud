@@ -5,7 +5,6 @@ import { IconButton } from "../components";
 function CustomTable ({ columns, data, actions }) {
 
     if (!data) {
-        console.log("I am here!");
         return (
             <p><em>Loading... Please refresh once the ASP.NET backend has started. See
                 <a href="https://aka.ms/jspsintegrationreact">
@@ -14,7 +13,6 @@ function CustomTable ({ columns, data, actions }) {
             </em></p>
         )
     } else {
-        console.log("Maybe a list?");
         return (
             <table className="table table-striped" aria-labelledby="tabelLabel">
                 <thead>
