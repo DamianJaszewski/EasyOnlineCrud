@@ -17,14 +17,9 @@ function App() {
             <Navigation/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
-            </Routes>
-            <Routes>
                 <Route path="login" element={<Login/>}/>
-            </Routes>
-            <Routes>
                 <Route path="register" element={<Register/>}/>
             </Routes>
-           
         </BrowserRouter>
     );
 }
