@@ -3,23 +3,30 @@ import { useState } from 'react';
 
 import { Form } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
+import { userService } from "../services/userService";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
 
     const initialNewUser = {
+        userName: '',
         email: '',
+        phoneNumber: '',
         password: ''
     }
 
     const [newUser, setNewUser] = useState(initialNewUser);
+    const navigate = useNavigate(); // Hook do nawigacji
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await fetch('https://localhost:7021/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(newUser),
-        });
+
+        try {
+            await userService.register(newUser);
+            navigate("/");
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     }
 
     return (

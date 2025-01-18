@@ -5,6 +5,7 @@ import { Form } from "react-bootstrap";
 import { ContainerWrapper, InputWrapper, CustomButton } from "../components";
 import { userService } from "../services/userService";
 import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 function Login() {
 
@@ -14,10 +15,17 @@ function Login() {
     }
 
     const [user, setUser] = useState(initialUser);
+    const navigate = useNavigate(); // Hook do nawigacji
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await userService.login(user);
+
+        try {
+            await userService.login(user);
+            navigate("/");
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     }
 
     return (
