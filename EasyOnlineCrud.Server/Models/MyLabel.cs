@@ -11,7 +11,6 @@ namespace EasyOnlineCrud.Server.Models
         public int Id { get; set; }
         public string Name { get; set; }
 
-        [JsonIgnore]
-        public virtual ICollection<MyTask> MyTasks { get; set; }
+        [JsonIgnore] public virtual ICollection<MyTask> MyTasks { get; set; }
     }
 }
