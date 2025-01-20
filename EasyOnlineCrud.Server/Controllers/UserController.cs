@@ -1,9 +1,12 @@
 ﻿using EasyOnlineCrud.Server.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace EasyOnlineCrud.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -39,6 +42,16 @@ namespace EasyOnlineCrud.Server.Controllers
 
             // Zwróć błędy w przypadku niepowodzenia
             return BadRequest(result.Errors);
+        }
+
+        [HttpGet]
+        public IActionResult GetUser()
+        {
+            MyUser user = new MyUser() {
+                UserName = User.FindFirstValue(ClaimTypes.Name) 
+            };
+
+            return Ok(user);
         }
     }
 }
