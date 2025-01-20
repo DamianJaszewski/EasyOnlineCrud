@@ -20,7 +20,7 @@ function CustomTable ({ columns, data, actions }) {
                         {columns.map(col =>
                             <th>{col.header}</th>
                         )}
-                        <th>Actions</th>
+                        <th>Akcje</th>
                     </tr>
                 </thead>
                 <tbody>

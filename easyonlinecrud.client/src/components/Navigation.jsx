@@ -15,13 +15,13 @@ function Navigation() {
         <Navbar variant="light" expand="lg" sticky="top" expanded={expanded} >
             <Container>
                 {/* Logo po lewej stronie */}
-                <Navbar.Brand href="/">Twoja Aplikacja</Navbar.Brand>
+                <Navbar.Brand href="/">WordFlow</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle} />
                 <Navbar.Collapse id="basic-navbar-nav">
                     {/* Nawigacja z prawej strony */}
                     <Nav className="ms-auto">
-                        <Link class='nav-link' to='/' onClick={handleClose}>Home</Link>
-                        <Link class='nav-link' to='/login' onClick={handleClose}>Account</Link>
+                        <Link class='nav-link' to='/' onClick={handleClose}>Talia</Link>
+                        <Link class='nav-link' to='/account' onClick={handleClose}>Konto</Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

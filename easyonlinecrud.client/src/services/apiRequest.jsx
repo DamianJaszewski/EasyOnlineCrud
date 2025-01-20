@@ -26,6 +26,11 @@ export const apiRequest = async (endpoint, { method = "GET", body, params = {} }
     // Wykonanie żądania
     const response = await fetch(`${API_BASE_URL}${endpoint}${queryString}`, config);
 
+    // Obsługa braku autoryzacji
+    if (response.status === 401) {
+        return null;
+    }
+
     // Obsługa błędu HTTP
     if (!response.ok) {
         const errorText = await response.text();
@@ -34,7 +39,11 @@ export const apiRequest = async (endpoint, { method = "GET", body, params = {} }
 
     // Jeśli brak treści, zwracamy null
     const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
+    if (contentType && contentType.includes("text/plain")) {
+        return response.text();
+    }
+
+    if (!contentType || (!contentType.includes("application/json"))) {
         return null; // Brak danych do sparsowania
     }
 

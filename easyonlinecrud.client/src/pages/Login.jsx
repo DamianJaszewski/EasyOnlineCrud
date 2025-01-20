@@ -57,7 +57,7 @@ function Login() {
                         marginTop: "1rem",
                         marginBottom: "1rem",
                         width: "45%"
-                    }} to='/register'>Register</Link>
+                    }} to='/register'>Zarejestruj</Link>
                     <CustomButton title="Zaloguj" size="45%"/>
                 </div>
             </Form>

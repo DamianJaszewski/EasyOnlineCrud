@@ -19,7 +19,6 @@ function Home() {
     }, []);
 
     const handleTaskData = async () => {
-
         const data = await myTaskService.getTasks();
         setMyTasks(data);
     }
@@ -54,8 +53,8 @@ function Home() {
     };
 
     const columns = [
-        { header: "Title", field: "title" },
-        { header: "Description", field: "description" }
+        { header: "Pytanie", field: "title" },
+        { header: "Odpowiedź", field: "description" }
     ];
 
     const actions = [
@@ -64,21 +63,20 @@ function Home() {
     ];
 
     return (
-
-        <ContainerWrapper maxWidth="800px" heading="Menadżer zadań">
-            <CustomButton title="Popup" onClick={handleNewTask} />
+        <ContainerWrapper maxWidth="800px" heading="Stos fiszek">
+            <CustomButton title="Dodaj" onClick={handleNewTask} />
             <Modal show={showModal} onHide={handleModalToggle} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add New Task</Modal.Title>
+                    <Modal.Title>Nowa fiszka</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         <div className="d-flex mb-3 gap-3" style={{flexWrap: "wrap"}}>
                         <InputWrapper
                             controlId="formTitle"
-                            title="Title"
+                            title="Tytuł"
                             type="text"
-                            placeholder="Enter title"
+                            placeholder="Pytanie"
                             value={newTask.title}
                             onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                             className="flex-fill"
@@ -87,13 +85,13 @@ function Home() {
                             controlId="formDescription"
                             title="Description"
                             type="text"
-                            placeholder="Enter description"
+                            placeholder="Odpowiedź"
                             value={newTask.description}
                             onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                             className="flex-fill"
                         />
                         </div>
-                        <CustomButton title="Add Task" />
+                        <CustomButton title="Dodaj" />
                     </Form>
                 </Modal.Body>
             </Modal>

@@ -10,7 +10,12 @@ export const userService = {
 
     register: (user) => apiRequest("/api/User", {
         method: "POST",
-        body: user,
-        params: { useCookies: true }
+        body: user
     }),
+
+    getUser: () => apiRequest("/api/User"),
+
+    logout: () => apiRequest("/logout", {
+        method: "POST"
+    })
 };
