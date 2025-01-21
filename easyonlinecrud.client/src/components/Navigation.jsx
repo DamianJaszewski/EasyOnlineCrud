@@ -20,7 +20,7 @@ function Navigation() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     {/* Nawigacja z prawej strony */}
                     <Nav className="ms-auto">
-                        <Link class='nav-link' to='/' onClick={handleClose}>Talia</Link>
+                        <Link class='nav-link' to='/' onClick={handleClose}>Zadania</Link>
                         <Link class='nav-link' to='/account' onClick={handleClose}>Konto</Link>
                     </Nav>
                 </Navbar.Collapse>

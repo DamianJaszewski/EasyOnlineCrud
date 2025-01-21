@@ -53,8 +53,8 @@ function Home() {
     };
 
     const columns = [
-        { header: "Pytanie", field: "title" },
-        { header: "Odpowiedź", field: "description" }
+        { header: "Tytuł", field: "title" },
+        { header: "Szczegóły", field: "description" }
     ];
 
     const actions = [
@@ -63,11 +63,11 @@ function Home() {
     ];
 
     return (
-        <ContainerWrapper maxWidth="800px" heading="Stos fiszek">
+        <ContainerWrapper maxWidth="800px" heading="Zadania">
             <CustomButton title="Dodaj" onClick={handleNewTask} />
             <Modal show={showModal} onHide={handleModalToggle} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Nowa fiszka</Modal.Title>
+                    <Modal.Title>Nowe Zadanie</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
@@ -76,7 +76,7 @@ function Home() {
                             controlId="formTitle"
                             title="Tytuł"
                             type="text"
-                            placeholder="Pytanie"
+                            placeholder="Tytuł"
                             value={newTask.title}
                             onChange={(e) => setNewTask({ ...newTask, title: e.target.value })}
                             className="flex-fill"
@@ -85,7 +85,7 @@ function Home() {
                             controlId="formDescription"
                             title="Description"
                             type="text"
-                            placeholder="Odpowiedź"
+                            placeholder="Szczegóły"
                             value={newTask.description}
                             onChange={(e) => setNewTask({ ...newTask, description: e.target.value })}
                             className="flex-fill"
