@@ -7,7 +7,7 @@ Built with a modern tech stack, the application emphasizes user experience and e
 * [General Information](#General-Information)
 * [Features](#Features)
 * [Tech Stack](#Tech-Stack)
-* [API Endpoints](#API-Endpoints)
+* [UI Screenshots](#UI-Screenshots)
 
 ## Features
 - **Task Management:** Create, view, update, and delete tasks.
@@ -45,3 +45,16 @@ Built with a modern tech stack, the application emphasizes user experience and e
     - `.NET CLI` and `npm` for development.
     - Configuration for development and production builds.
 - **Version Control:** Git.
+
+### UI Screenshots
+- Home screen of application.
+<img src="./images/Home.png" alt="drawing" width="700" />
+
+- Add Task view with popup modal.
+<img src="./images/AddTask.png" alt="drawing" width="700" />
+
+- Register screen, register new user with Identity.
+<img src="./images/Registration.png" alt="drawing" width="700" />
+
+- Register with responsive mobile view.   
+<img src="./images/Responive.png" alt="drawing" width="200" />
